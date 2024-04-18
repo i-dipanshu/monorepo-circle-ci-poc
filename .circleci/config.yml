@@ -68,6 +68,8 @@ jobs:
                   git reflog | grep -Eo '^[a-f0-9]{7,}' | sed -n '2p'
                   echo "#############"
                   git reflog | awk 'NR==2 {print $1}'
+                  echo "#############"
+                  git log --oneline
             - run : echo "Changes found ... executing this job"
 
 workflows:
