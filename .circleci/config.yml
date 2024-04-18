@@ -11,9 +11,11 @@ commands:
       DIR_TO_CHECK:
         type: string
     steps:
+      - checkout
       - run:
           name: Check dir changed
           command: |
+            ls -la
             REF=HEAD
             SINCE=origin/main
             DIR_TO_CHECK=<<parameters.DIR_TO_CHECK>>
