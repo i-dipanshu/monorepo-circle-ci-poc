@@ -1,7 +1,7 @@
 #!/bin/bash
 
 REF=HEAD
-SINCE=origin/main
+SINCE=$(git reflog | grep -Eo '^[a-f0-9]{7,}' | sed -n '2p')
 DIR_TO_CHECK=svc-1
 # DIR_TO_CHECK=svc-2
 

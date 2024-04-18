@@ -44,13 +44,10 @@ jobs:
       - check_dir_changed:
           DIR_TO_CHECK: svc-1
       - when:
-          condition:
-            equal: [IS_CHANGED, true ]
+          condition: $IS_CHANGED
           steps:
             - run : echo "Changes found ... executing this job"
-          else:
-            - run: echo "No changes found ... Skipping the job"
-  
+
   job_for_svc_2:
     parameters:
       flag_checking_dir_change:
@@ -61,12 +58,14 @@ jobs:
       - check_dir_changed:
           DIR_TO_CHECK: svc-2
       - when:
-          condition:
-            equal: [IS_CHANGED, true ]
+          condition: $IS_CHANGED
           steps:
+            - run: 
+                command: | 
+                  echo $IS_CHANGED
+                  git reflog
+                  git reflog | grep -Eo '^[a-f0-9]{7,}' | sed -n '2p'
             - run : echo "Changes found ... executing this job"
-          else:
-            - run: echo "No changes found ... Skipping the job"
 
 workflows:
   svc_1_workflow:
