@@ -37,30 +37,34 @@ jobs:
   job_for_svc_1:
     parameters:
       flag_checking_dir_change:
-        type: env_var_name
+        type: boolean
         default: IS_CHANGED
     executor: docker/docker
     steps:
       - check_dir_changed:
           DIR_TO_CHECK: svc-1
       - when:
-          condition: << parameters.flag_checking_dir_change >> == "true"
+          condition: $IS_CHANGED
           steps:
             - run : echo "Changes found ... executing this job"
 
   job_for_svc_2:
     parameters:
       flag_checking_dir_change:
-        type: env_var_name
+        type: boolean
         default: IS_CHANGED
     executor: docker/docker
     steps:
       - check_dir_changed:
           DIR_TO_CHECK: svc-2
       - when:
-          condition: << parameters.flag_checking_dir_change >> == "true"
+          condition: $IS_CHANGED
           steps:
-            - run: echo $IS_CHANGED
+            - run: 
+                command: | 
+                  echo $IS_CHANGED
+                  git reflog
+                  git reflog | grep -Eo '^[a-f0-9]{7,}' | sed -n '2p'
             - run : echo "Changes found ... executing this job"
 
 workflows:
