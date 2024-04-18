@@ -26,9 +26,10 @@ commands:
             printf "Files changed:\n${FILES_CHANGED}\n"
 
             if [[ -n $FILES_CHANGED ]]; then
-              echo "Found changes !!!"
+              echo "Found changes !!! ... setting var to true"
               echo 'export IS_CHANGED='"true" >> "$BASH_ENV"
             else
+              echo "No changes Found!!! ... setting var to false"
               echo 'export IS_CHANGED='"false" >> "$BASH_ENV"
             fi
 
@@ -71,4 +72,4 @@ workflows:
       - job_for_svc_1
   svc_2_workflow:
     jobs:
-      - job_for_svc_1
+      - job_for_svc_2
