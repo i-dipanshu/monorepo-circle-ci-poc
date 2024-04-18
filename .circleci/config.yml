@@ -44,11 +44,10 @@ jobs:
       - check_dir_changed:
           DIR_TO_CHECK: svc-1
       - when:
-          condition: $IS_CHANGED
+          condition: << parameters.flag_checking_dir_change >> == "true"
           steps:
             - run : echo "Changes found ... executing this job"
 
-  
   job_for_svc_2:
     parameters:
       flag_checking_dir_change:
@@ -59,7 +58,7 @@ jobs:
       - check_dir_changed:
           DIR_TO_CHECK: svc-2
       - when:
-          condition: $IS_CHANGED
+          condition: << parameters.flag_checking_dir_change >> == "true"
           steps:
             - run: echo $IS_CHANGED
             - run : echo "Changes found ... executing this job"
