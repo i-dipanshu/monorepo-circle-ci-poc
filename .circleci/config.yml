@@ -60,9 +60,9 @@ jobs:
       - check_dir_changed:
           DIR_TO_CHECK: svc-2
       - when:
-          condition:
-            equal: [$IS_CHANGED, "true" ]
+          condition: IS_CHANGED
           steps:
+            - run: echo $IS_CHANGED
             - run : echo "Changes found ... executing this job"
           else:
             - run: echo "No changes found ... Skipping the job"
