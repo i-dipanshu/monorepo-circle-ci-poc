@@ -37,7 +37,7 @@ jobs:
   job_for_svc_1:
     parameters:
       flag_checking_dir_change:
-        type: boolean
+        type: env_var_name
         default: IS_CHANGED
     executor: docker/docker
     steps:
@@ -51,7 +51,7 @@ jobs:
   job_for_svc_2:
     parameters:
       flag_checking_dir_change:
-        type: boolean
+        type: env_var_name
         default: IS_CHANGED
     executor: docker/docker
     steps:
