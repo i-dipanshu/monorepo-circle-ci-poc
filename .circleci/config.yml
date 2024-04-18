@@ -45,7 +45,7 @@ jobs:
           DIR_TO_CHECK: svc-1
       - when:
           condition:
-            equal: [$IS_CHANGED, true ]
+            equal: [$IS_CHANGED, "true" ]
           steps:
             - run : echo "Changes found ... executing this job"
           else:
@@ -62,7 +62,7 @@ jobs:
           DIR_TO_CHECK: svc-2
       - when:
           condition:
-            equal: [$IS_CHANGED, true ]
+            equal: [$IS_CHANGED, "true" ]
           steps:
             - run : echo "Changes found ... executing this job"
           else:
